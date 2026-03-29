@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeDose — Terms of Use</title>
+  <style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fa;
+    --border: #e9ecef;
+    --text: #212529;
+    --muted: #6c757d;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --danger: #dc3545;
+    --radius: 8px;
+    --max-width: 860px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+  }
+  .topbar {
+    background: var(--accent);
+    color: #fff;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .topbar .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.3px; }
+  .topbar nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 20px;
+    transition: color 0.2s;
+  }
+  .topbar nav a:hover, .topbar nav a.active { color: #fff; }
+  .hero {
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    color: #fff;
+    padding: 64px 24px 48px;
+    text-align: center;
+  }
+  .hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 16px; opacity: 0.85; margin-bottom: 20px; }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .warning-banner {
+    background: #fff3cd;
+    border-left: 4px solid #f59e0b;
+    padding: 14px 24px;
+    font-size: 14px;
+    color: #92400e;
+  }
+  .warning-banner strong { display: block; margin-bottom: 2px; }
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: var(--accent); text-decoration: none; font-size: 15px; }
+  .toc a:hover { text-decoration: underline; }
+  section { margin-bottom: 48px; scroll-margin-top: 72px; }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e3a8a;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-light);
+    margin-bottom: 16px;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1d4ed8;
+    margin: 24px 0 10px;
+  }
+  p { margin-bottom: 14px; color: var(--text); }
+  ul, ol { padding-left: 22px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; }
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+  .callout.warning {
+    background: #fff3cd;
+    border-left: 4px solid #f59e0b;
+    color: #78350f;
+  }
+  .callout.info {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    color: #1e3a8a;
+  }
+  .callout.danger {
+    background: #fef2f2;
+    border-left: 4px solid var(--danger);
+    color: #7f1d1d;
+  }
+  .callout strong { display: block; margin-bottom: 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .contact-card p { margin: 0 0 4px; }
+  .contact-card a { color: var(--accent); }
+  .rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .right-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  .right-item strong { display: block; color: var(--accent); margin-bottom: 2px; font-size: 15px; }
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 600px) {
+    .topbar nav { display: none; }
+    .hero { padding: 40px 16px 32px; }
+    .container { padding: 32px 16px; }
+    .rights-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="brand">SafeDose</span>
+  <nav>
+    <a href="terms.html" class="active">Terms of Use</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</div>
+
+<div class="hero">
+  <h1>Terms of Use</h1>
+  <div class="subtitle">SafeDose Mobile Application</div>
+  <span class="badge">Effective: March 29, 2026 &nbsp;·&nbsp; Version 1.0</span>
+</div>
+
+<div class="warning-banner">
+  <strong>⚕️ Not Medical Advice</strong>
+  SafeDose is a personal record-keeping tool only. It does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional.
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#about">About SafeDose</a></li>
+      <li><a href="#eligibility">Eligibility</a></li>
+      <li><a href="#accounts">User Accounts and Data</a></li>
+      <li><a href="#acceptable">Acceptable Use</a></li>
+      <li><a href="#children">Children's Data</a></li>
+      <li><a href="#ip">Intellectual Property</a></li>
+      <li><a href="#warranties">Disclaimer of Warranties</a></li>
+      <li><a href="#liability">Limitation of Liability</a></li>
+      <li><a href="#governing">Governing Law and Disputes</a></li>
+      <li><a href="#changes-terms">Changes to These Terms</a></li>
+      <li><a href="#contact-terms">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <section id="about">
+    <h2>1. About SafeDose</h2>
+    <p>SafeDose is a health-tracking mobile application that helps parents and guardians monitor a child's temperature, record administered medications and dosages, and store basic child profile information including name, weight, and year of birth. SafeDose is intended for informational and personal record-keeping purposes only.</p>
+
+    <div class="callout danger">
+      <strong>⚠️ Medical Disclaimer</strong>
+      SAFEDOSE DOES NOT PROVIDE MEDICAL ADVICE. The information or outputs generated by the App are not a substitute for professional medical advice, diagnosis, or treatment. Always seek guidance from your physician or qualified health provider with any questions regarding your child's health. Never disregard professional medical advice because of something recorded in this App.
+    </div>
+
+    <h3>1.1 Emergency Situations</h3>
+    <p>In the event of a medical emergency, call your local emergency services (e.g., 112 in the EU, 911 in the US) immediately. Do not rely on SafeDose in emergency situations.</p>
+  </section>
+
+  <section id="eligibility">
+    <h2>2. Eligibility</h2>
+    <p>SafeDose is intended for use by adults (18 years of age or older) acting as parents or legal guardians of a child. By using the App, you represent and warrant that:</p>
+    <ul>
+      <li>You are at least 18 years of age;</li>
+      <li>You are the parent or legal guardian of the child whose data you enter;</li>
+      <li>You have the legal authority to enter and manage information about that child;</li>
+      <li>Your use of the App complies with all applicable laws in your jurisdiction.</li>
+    </ul>
+  </section>
+
+  <section id="accounts">
+    <h2>3. User Accounts and Data</h2>
+    <p>SafeDose stores data locally on your device and/or in secured cloud services depending on App configuration. You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. Notify us immediately at <a href="mailto:contact@criscode.com">contact@criscode.com</a> of any unauthorized use.</p>
+  </section>
+
+  <section id="acceptable">
+    <h2>4. Acceptable Use</h2>
+    <p>You agree to use SafeDose only for lawful purposes and in accordance with these Terms. You must not:</p>
+    <ul>
+      <li>Use the App on behalf of a child who is not in your legal care;</li>
+      <li>Enter false, misleading, or fraudulent information;</li>
+      <li>Attempt to gain unauthorized access to any part of the App or its systems;</li>
+      <li>Reverse engineer, decompile, or disassemble any part of the App;</li>
+      <li>Use the App for commercial purposes without our prior written consent;</li>
+      <li>Attempt to interfere with the proper functioning of the App.</li>
+    </ul>
+  </section>
+
+  <section id="children">
+    <h2>5. Children's Data</h2>
+    <p>SafeDose processes health-related data about children as entered by their parents or guardians. We do not knowingly allow children to create accounts or directly interact with the App. All data about a child is entered and controlled exclusively by the parent or guardian.</p>
+    <p>Please see our <a href="privacy.html">Privacy Policy</a> for full details on how we handle children's data in compliance with GDPR, COPPA, and other applicable laws.</p>
+  </section>
+
+  <section id="ip">
+    <h2>6. Intellectual Property</h2>
+    <p>All content, features, and functionality of SafeDose — including but not limited to text, graphics, logos, icons, and software — are the exclusive property of Criscode and its licensors and are protected by applicable intellectual property laws. You are granted a limited, non-exclusive, non-transferable, revocable license to use the App for personal, non-commercial purposes.</p>
+
+    <h3>6.1 Open Source Licenses</h3>
+    <p>SafeDose is built with the Flutter framework (licensed under the BSD 3-Clause License by Google) and incorporates various open-source packages. These packages are used under their respective open-source licenses (including MIT, BSD, and Apache 2.0 licenses). In accordance with these license requirements, a full list of open-source components and their license notices is accessible within the App under <strong>Settings → Open Source Licenses</strong>.</p>
+    <p>The inclusion of open-source software does not grant you any rights beyond those set forth in the respective open-source licenses and these Terms.</p>
+  </section>
+
+  <section id="warranties">
+    <h2>7. Disclaimer of Warranties</h2>
+    <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, SAFEDOSE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE APP WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF HARMFUL COMPONENTS.</p>
+  </section>
+
+  <section id="liability">
+    <h2>8. Limitation of Liability</h2>
+    <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL CRISCODE, ITS DIRECTORS, EMPLOYEES, PARTNERS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR USE OF OR INABILITY TO USE THE APP.</p>
+    <p>In jurisdictions that do not allow the exclusion or limitation of certain types of liability, our liability is limited to the greatest extent permitted by applicable law.</p>
+  </section>
+
+  <section id="governing">
+    <h2>9. Governing Law and Dispute Resolution</h2>
+    <p>SafeDose is operated by Criscode, a company registered in Poland. These Terms are governed by Polish law and EU regulations. For users in the European Union, these Terms do not affect any mandatory consumer protection rights available under local law. For users outside the EU, applicable local law may also apply.</p>
+    <p>We encourage you to contact us first to resolve any dispute informally. EU users may also use the EU Online Dispute Resolution platform at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+  </section>
+
+  <section id="changes-terms">
+    <h2>10. Changes to These Terms</h2>
+    <p>We reserve the right to update or modify these Terms at any time. We will notify you of significant changes through the App or by other reasonable means. Your continued use of SafeDose after any changes constitutes your acceptance of the revised Terms.</p>
+  </section>
+
+  <section id="contact-terms">
+    <h2>11. Contact Us</h2>
+    <p>If you have any questions about these Terms of Use, please contact us:</p>
+    <div class="contact-card">
+      <p><strong>Criscode</strong></p>
+      <p>ul. Gryczana 25, 56-400 Oleśnica, Poland</p>
+      <p>Email: <a href="mailto:contact@criscode.com">contact@criscode.com</a></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 Criscode. All rights reserved.</p>
+  <p style="margin-top:8px"><a href="terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>

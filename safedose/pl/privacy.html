@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeDose — Polityka Prywatności</title>
+  <style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fa;
+    --border: #e9ecef;
+    --text: #212529;
+    --muted: #6c757d;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --danger: #dc3545;
+    --radius: 8px;
+    --max-width: 860px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+  }
+  .topbar {
+    background: var(--accent);
+    color: #fff;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .topbar .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.3px; }
+  .topbar nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 20px;
+    transition: color 0.2s;
+  }
+  .topbar nav a:hover, .topbar nav a.active { color: #fff; }
+  .lang-switcher {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .lang-switcher a {
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.2s;
+  }
+  .lang-switcher a.active, .lang-switcher a:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border-color: rgba(255,255,255,0.6);
+  }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .hero {
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    color: #fff;
+    padding: 64px 24px 48px;
+    text-align: center;
+  }
+  .hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 16px; opacity: 0.85; margin-bottom: 20px; }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .warning-banner {
+    background: #fff3cd;
+    border-left: 4px solid #f59e0b;
+    padding: 14px 24px;
+    font-size: 14px;
+    color: #92400e;
+  }
+  .warning-banner strong { display: block; margin-bottom: 2px; }
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: var(--accent); text-decoration: none; font-size: 15px; }
+  .toc a:hover { text-decoration: underline; }
+  section { margin-bottom: 48px; scroll-margin-top: 72px; }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e3a8a;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-light);
+    margin-bottom: 16px;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1d4ed8;
+    margin: 24px 0 10px;
+  }
+  p { margin-bottom: 14px; color: var(--text); }
+  ul, ol { padding-left: 22px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; }
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+  .callout.warning {
+    background: #fff3cd;
+    border-left: 4px solid #f59e0b;
+    color: #78350f;
+  }
+  .callout.info {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    color: #1e3a8a;
+  }
+  .callout.danger {
+    background: #fef2f2;
+    border-left: 4px solid var(--danger);
+    color: #7f1d1d;
+  }
+  .callout strong { display: block; margin-bottom: 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .contact-card p { margin: 0 0 4px; }
+  .contact-card a { color: var(--accent); }
+  .rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .right-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  .right-item strong { display: block; color: var(--accent); margin-bottom: 2px; font-size: 15px; }
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 600px) {
+    .topbar nav { display: none; }
+    .hero { padding: 40px 16px 32px; }
+    .container { padding: 32px 16px; }
+    .rights-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+
+<div class="topbar">
+  <span class="brand">SafeDose</span>
+  <div class="topbar-right">
+    <nav>
+      <a href="terms.html">Terms of Use</a>
+      <a href="privacy.html" class="active">Privacy Policy</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="privacy.html">EN</a>
+      <a href="privacy-pl.html" class="active">PL</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>Polityka Prywatności</h1>
+  <div class="subtitle">Aplikacja mobilna SafeDose</div>
+  <span class="badge">Data wejścia w życie: 29 marca 2026 &nbsp;·&nbsp; Wersja 1.0</span>
+</div>
+
+<div class="warning-banner">
+  <strong>🔒 Twoje dane — Twoja kontrola</strong>
+  Przetwarzamy wrażliwe dane zdrowotne dotyczące dzieci. Nie sprzedajemy Twoich danych, nie wyświetlamy reklam (na razie) i gromadzimy wyłącznie to, co jest absolutnie niezbędne.
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Spis treści</h2>
+    <ol>
+      <li><a href="#intro">Wprowadzenie</a></li>
+      <li><a href="#data-collected">Jakie dane gromadzimy</a></li>
+      <li><a href="#how-used">Jak wykorzystujemy Twoje dane</a></li>
+      <li><a href="#legal-basis">Podstawa prawna przetwarzania (RODO)</a></li>
+      <li><a href="#coppa">Prywatność dzieci (COPPA)</a></li>
+      <li><a href="#analytics">Analityka</a></li>
+      <li><a href="#advertising">Reklamy</a></li>
+      <li><a href="#storage">Przechowywanie danych i bezpieczeństwo</a></li>
+      <li><a href="#sharing">Udostępnianie danych</a></li>
+      <li><a href="#transfers">Międzynarodowe transfery danych</a></li>
+      <li><a href="#rights">Twoje prawa</a></li>
+      <li><a href="#open-source">Oprogramowanie Open Source</a></li>
+      <li><a href="#changes-privacy">Zmiany Polityki Prywatności</a></li>
+      <li><a href="#contact-privacy">Kontakt</a></li>
+    </ol>
+  </div>
+
+  <section id="intro">
+    <h2>1. Wprowadzenie</h2>
+    <p>Niniejsza Polityka Prywatności wyjaśnia, w jaki sposób Criscode („my", „nas" lub „nasze") gromadzi, wykorzystuje, przechowuje i chroni informacje podczas korzystania z aplikacji mobilnej SafeDose („Aplikacja"). Jesteśmy zaangażowani w ochronę Twojej prywatności oraz prywatności dzieci pozostających pod Twoją opieką.</p>
+    <p>SafeDose przetwarza wrażliwe dane zdrowotne dotyczące dzieci. Przestrzegamy przepisów unijnego Ogólnego Rozporządzenia o Ochronie Danych (RODO), amerykańskiej ustawy o ochronie prywatności dzieci w internecie (COPPA) oraz innych obowiązujących przepisów o ochronie danych na całym świecie.</p>
+    <p><strong>Administrator danych:</strong> Criscode, ul. Gryczana 25, 56-400 Oleśnica, Polska</p>
+  </section>
+
+  <section id="data-collected">
+    <h2>2. Jakie dane gromadzimy</h2>
+    <p>Gromadzimy wyłącznie dane, które samodzielnie wprowadzasz do Aplikacji:</p>
+
+    <h3>2.1 Dane profilu dziecka</h3>
+    <ul>
+      <li>Imię dziecka</li>
+      <li>Rok urodzenia</li>
+      <li>Waga</li>
+    </ul>
+
+    <h3>2.2 Dane dotyczące zdrowia</h3>
+    <ul>
+      <li>Pomiary temperatury ciała (ze znacznikami czasu)</li>
+      <li>Nazwa(-y) podawanych leków</li>
+      <li>Dawka leku i godzina podania</li>
+    </ul>
+
+    <h3>2.3 Dane analityczne (za Twoją zgodą)</h3>
+    <ul>
+      <li>Anonimowe zdarzenia dotyczące korzystania z Aplikacji (odwiedzane ekrany, używane funkcje)</li>
+      <li>Wersja Aplikacji i typ urządzenia (do analizy awarii)</li>
+      <li>Anonimowe dane sesji</li>
+    </ul>
+    <p>Dane analityczne są gromadzone wyłącznie za Twoją wyraźną zgodą i nie są powiązane z danymi zdrowotnymi dziecka ani z Twoją tożsamością.</p>
+
+    <h3>2.4 Dane reklamowe (funkcja przyszła)</h3>
+    <p>Aplikacja nie wyświetla obecnie reklam. W chwili wprowadzenia reklam zaktualizujemy niniejszą Politykę i poprosimy o Twoją wyraźną zgodę przed zebraniem jakichkolwiek danych związanych z reklamami. Dla użytkowników z EOG wdrożymy certyfikowaną przez Google platformę zarządzania zgodami (CMP) zgodną z IAB TCF v2.2 przed wyświetleniem jakichkolwiek spersonalizowanych reklam.</p>
+
+    <div class="callout info">
+      <strong>ℹ️ Czego NIE gromadzimy</strong>
+      Pełnych imion i nazwisk, adresów zamieszkania, dokumentów tożsamości, zdjęć dzieci, danych lokalizacji GPS, bezpośrednich danych od dzieci, danych finansowych ani żadnych danych zdrowotnych wykraczających poza powyższy zakres.
+    </div>
+  </section>
+
+  <section id="how-used">
+    <h2>3. Jak wykorzystujemy Twoje dane</h2>
+    <p>Twoje dane wykorzystujemy wyłącznie w następujących celach:</p>
+    <ul>
+      <li>wyświetlanie historii zdrowia dziecka w Aplikacji;</li>
+      <li>umożliwienie śledzenia historii leków i trendów temperatury;</li>
+      <li>poprawa wydajności Aplikacji i naprawianie błędów technicznych (za Twoją zgodą na analitykę);</li>
+      <li>wyświetlanie reklam kontekstowych lub spersonalizowanych (funkcja przyszła, wymagana odrębna zgoda);</li>
+      <li>wypełnianie obowiązków prawnych.</li>
+    </ul>
+    <p><strong>Nie sprzedajemy, nie wynajmujemy ani nie udostępniamy Twoich danych osobowych stronom trzecim w celach marketingowych.</strong></p>
+  </section>
+
+  <section id="legal-basis">
+    <h2>4. Podstawa prawna przetwarzania (RODO)</h2>
+    <p>Jeśli przebywasz na terenie Europejskiego Obszaru Gospodarczego (EOG), przetwarzamy Twoje dane na następujących podstawach prawnych:</p>
+    <ul>
+      <li><strong>Zgoda (art. 6 ust. 1 lit. a RODO):</strong> Udzielasz wyraźnej zgody przy wprowadzaniu danych zdrowotnych dziecka, włączaniu analityki lub (w przyszłości) akceptowaniu spersonalizowanych reklam. Zgodę możesz wycofać w dowolnym momencie.</li>
+      <li><strong>Prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO):</strong> Na potrzeby raportowania awarii i podstawowego monitorowania stabilności Aplikacji, gdzie mamy uzasadniony interes w utrzymaniu sprawnie działającej Aplikacji.</li>
+      <li><strong>Obowiązek prawny (art. 6 ust. 1 lit. c RODO):</strong> Gdy jest to wymagane przez obowiązujące przepisy prawa.</li>
+    </ul>
+    <p>Dane zdrowotne dotyczące dzieci stanowią dane szczególnej kategorii w rozumieniu art. 9 RODO. Przetwarzamy je wyłącznie na podstawie Twojej wyraźnej zgody (art. 9 ust. 2 lit. a RODO).</p>
+  </section>
+
+  <section id="coppa">
+    <h2>5. Prywatność dzieci (COPPA)</h2>
+    <p>Aplikacja SafeDose jest przeznaczona wyłącznie dla rodziców i opiekunów prawnych. Nie gromadzimy świadomie danych osobowych bezpośrednio od dzieci poniżej 13. roku życia (lub odpowiedniego wieku wymaganego przepisami w danej jurysdykcji). Wszelkie informacje dotyczące dziecka są wprowadzane wyłącznie przez rodzica lub opiekuna.</p>
+    <p>Jeśli uważasz, że przypadkowo zebraliśmy dane bezpośrednio od dziecka bez zgody rodzica, niezwłocznie skontaktuj się z nami pod adresem <a href="mailto:contact@criscode.com">contact@criscode.com</a> — dane zostaną niezwłocznie usunięte.</p>
+    <p>Zgodnie z COPPA rodzice mogą w dowolnym momencie przeglądać, aktualizować lub żądać usunięcia danych swojego dziecka (zob. sekcja 11 — Twoje prawa).</p>
+    <div class="callout warning">
+      <strong>⚠️ Reklamy a dzieci</strong>
+      Gdy wprowadzimy reklamy, wdrożymy ścisłe mechanizmy kontrolne, aby żadne reklamy behawioralne ani spersonalizowane nie były wyświetlane w kontekście danych zdrowotnych dzieci. Reklamy będą kierowane do rodzica/opiekuna, a nie do dziecka.
+    </div>
+  </section>
+
+  <section id="analytics">
+    <h2>6. Analityka</h2>
+    <p>Aplikacja gromadzi anonimowe dane analityczne dotyczące użytkowania, aby pomóc nam zrozumieć, jak jest używana, i poprawić jej funkcjonalność. Analityka jest gromadzona wyłącznie za Twoją wyraźną zgodą. W tym celu korzystamy ze standardowych narzędzi branżowych (takich jak Firebase Analytics firmy Google).</p>
+    <p>Gromadzone dane analityczne obejmują: wzorce użytkowania funkcji, czas trwania sesji i raporty o awariach. Dane te są anonimizowane i nie są powiązane z dokumentacją zdrowotną dziecka ani z Twoją tożsamością.</p>
+    <p>Możesz zrezygnować z analityki w dowolnym momencie w sekcji <strong>Ustawienia → Prywatność → Analityka</strong>. Rezygnacja nie wpływa na funkcjonalność Aplikacji.</p>
+    <p>Dla użytkowników z EOG śledzenie analityczne nie rozpoczyna się przed udzieleniem wyraźnej zgody w ekranie zgód w Aplikacji.</p>
+  </section>
+
+  <section id="advertising">
+    <h2>7. Reklamy</h2>
+    <p>Aplikacja SafeDose nie wyświetla obecnie reklam. Planujemy wprowadzenie reklam w przyszłej wersji. Gdy to nastąpi:</p>
+    <ul>
+      <li>zostaniesz powiadomiony z wyprzedzeniem i poproszony o wyraźną zgodę przed zebraniem jakichkolwiek danych związanych z reklamami;</li>
+      <li>użytkownicy z EOG zobaczą formularz zgody zgodny z IAB TCF v2.2 (Google UMP SDK lub równoważna certyfikowana przez Google platforma CMP) przed wyświetleniem jakichkolwiek reklam;</li>
+      <li>będziesz mógł wybrać między reklamami spersonalizowanymi a niespersonalizowanymi;</li>
+      <li>Aplikacja będzie obsługiwać Google Consent Mode v2 dla użytkowników z EOG i Wielkiej Brytanii;</li>
+      <li>na urządzeniach iOS zostanie wyświetlona prośba o zgodę ATT (App Tracking Transparency) przed uzyskaniem dostępu do identyfikatora reklamowego (IDFA);</li>
+      <li>nigdy nie będziemy wyświetlać reklam behawioralnych ani spersonalizowanych na podstawie danych zdrowotnych dziecka;</li>
+      <li>będziesz mógł wycofać zgodę na reklamy w dowolnym momencie w sekcji <strong>Ustawienia → Prywatność → Reklamy</strong>.</li>
+    </ul>
+  </section>
+
+  <section id="storage">
+    <h2>8. Przechowywanie danych i bezpieczeństwo</h2>
+
+    <h3>8.1 Gdzie dane są przechowywane</h3>
+    <p>Dane wprowadzone do aplikacji SafeDose są przechowywane lokalnie na Twoim urządzeniu. Jeśli włączona jest kopia zapasowa w chmurze, dane są przechowywane w zaszyfrowanej infrastrukturze chmurowej (np. Google Firebase) na serwerach zlokalizowanych w UE lub USA, w zależności od regionu i konfiguracji dostawcy.</p>
+
+    <h3>8.2 Środki bezpieczeństwa</h3>
+    <p>Wdrażamy standardowe środki bezpieczeństwa branżowego, w tym:</p>
+    <ul>
+      <li>szyfrowanie danych w spoczynku i podczas transmisji (TLS/SSL);</li>
+      <li>kontrolę dostępu ograniczającą dostęp do przechowywanych danych;</li>
+      <li>regularne oceny bezpieczeństwa naszej infrastruktury.</li>
+    </ul>
+    <p>Żadna metoda transmisji ani przechowywania danych nie jest w 100% bezpieczna. Nie możemy zagwarantować absolutnego bezpieczeństwa Twoich danych, ale jesteśmy zobowiązani do stosowania najlepszych praktyk.</p>
+
+    <h3>8.3 Okres przechowywania danych</h3>
+    <p>Przechowujemy Twoje dane przez cały okres korzystania z Aplikacji. Możesz usunąć poszczególne wpisy lub wszystkie dane w dowolnym momencie w ustawieniach Aplikacji. Po usunięciu konta (jeśli dotyczy) wszystkie dane osobowe są usuwane w ciągu 30 dni, z wyjątkiem przypadków, gdy przepisy prawa wymagają ich dłuższego przechowywania.</p>
+  </section>
+
+  <section id="sharing">
+    <h2>9. Udostępnianie danych</h2>
+    <p>Nie sprzedajemy Twoich danych. Możemy udostępniać dane następującym ograniczonym kategoriom stron trzecich:</p>
+    <ul>
+      <li><strong>Dostawcy usług chmurowych:</strong> Usługi hostingowe i backendowe (np. Google Firebase), które przetwarzają dane wyłącznie w naszym imieniu na podstawie umów o przetwarzaniu danych (DPA/UPD);</li>
+      <li><strong>Dostawcy analityki:</strong> Anonimowa analityka użytkowania (np. Firebase Analytics), wyłącznie za Twoją zgodą;</li>
+      <li><strong>Sieci reklamowe (w przyszłości):</strong> Wyłącznie po udzieleniu przez Ciebie wyraźnej zgody i zgodnie z RODO/COPPA, jak opisano w sekcji 7;</li>
+      <li><strong>Organy prawne:</strong> Jeśli jest to wymagane przez prawo, postanowienie sądu lub w celu ochrony bezpieczeństwa i praw użytkowników.</li>
+    </ul>
+    <p>Wszyscy dostawcy usług są zobowiązani umownie do bezpiecznego przetwarzania Twoich danych wyłącznie zgodnie z naszymi instrukcjami.</p>
+  </section>
+
+  <section id="transfers">
+    <h2>10. Międzynarodowe transfery danych</h2>
+    <p>Jeśli przebywasz na terenie EOG, Twoje dane mogą być przekazywane do krajów spoza EOG (np. Stanów Zjednoczonych). W takich przypadkach zapewniamy odpowiednie zabezpieczenia, w tym Standardowe Klauzule Umowne (SCC) zatwierdzone przez Komisję Europejską, aby chronić Twoje dane zgodnie z wymogami Rozdziału V RODO.</p>
+  </section>
+
+  <section id="rights">
+    <h2>11. Twoje prawa</h2>
+
+    <h3>11.1 Prawa na podstawie RODO (użytkownicy z EOG)</h3>
+    <p>Jeśli przebywasz na terenie EOG, przysługują Ci następujące prawa:</p>
+    <div class="rights-grid">
+      <div class="right-item"><strong>Dostęp</strong>Zażądaj kopii danych, które przechowujemy o Tobie i Twoim dziecku.</div>
+      <div class="right-item"><strong>Sprostowanie</strong>Popraw niedokładne lub niekompletne dane.</div>
+      <div class="right-item"><strong>Usunięcie</strong>Zażądaj usunięcia swoich danych („prawo do bycia zapomnianym").</div>
+      <div class="right-item"><strong>Ograniczenie</strong>Zażądaj ograniczenia sposobu przetwarzania Twoich danych.</div>
+      <div class="right-item"><strong>Przenoszalność</strong>Otrzymaj swoje dane w formacie nadającym się do odczytu maszynowego.</div>
+      <div class="right-item"><strong>Sprzeciw</strong>Sprzeciwić się przetwarzaniu opartemu na prawnie uzasadnionym interesie.</div>
+      <div class="right-item"><strong>Cofnięcie zgody</strong>W dowolnym momencie, w odniesieniu do przetwarzania opartego na zgodzie.</div>
+      <div class="right-item"><strong>Skarga</strong>Złóż skargę do krajowego organu ochrony danych (UODO w Polsce).</div>
+    </div>
+    <p style="margin-top:16px">Aby skorzystać z tych praw, skontaktuj się z nami pod adresem <a href="mailto:contact@criscode.com">contact@criscode.com</a>. Odpowiemy w ciągu 30 dni.</p>
+    <p>Masz również prawo do złożenia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa, e-mail: <a href="mailto:kancelaria@uodo.gov.pl">kancelaria@uodo.gov.pl</a>, strona: <a href="https://uodo.gov.pl" target="_blank" rel="noopener">uodo.gov.pl</a>.</p>
+
+    <h3>11.2 Prawa na podstawie COPPA (użytkownicy z USA)</h3>
+    <p>Rodzice i opiekunowie mają prawo do:</p>
+    <ul>
+      <li>przeglądania danych osobowych zebranych o swoim dziecku;</li>
+      <li>żądania poprawienia lub usunięcia tych danych;</li>
+      <li>odmowy dalszego zbierania lub wykorzystywania danych dziecka.</li>
+    </ul>
+    <p>Skontaktuj się z nami pod adresem <a href="mailto:contact@criscode.com">contact@criscode.com</a>, aby skorzystać z tych praw.</p>
+  </section>
+
+  <section id="open-source">
+    <h2>12. Oprogramowanie Open Source</h2>
+    <p>Aplikacja SafeDose jest zbudowana przy użyciu frameworka Flutter i szeregu pakietów open source. Flutter jest objęty licencją BSD 3-Clause (Copyright 2014, The Flutter Authors). Pakiety stron trzecich są używane na podstawie odpowiednich licencji, w tym MIT, BSD i Apache 2.0.</p>
+    <p>Wiele licencji open source wymaga wyświetlania informacji o prawach autorskich w Aplikacji. W celu spełnienia tych wymogów pełna lista wszystkich komponentów open source, ich autorów oraz treści licencji jest dostępna w Aplikacji w sekcji <strong>Ustawienia → O aplikacji → Licencje Open Source</strong>.</p>
+    <p>Korzystanie z oprogramowania open source w aplikacji SafeDose nie wpływa na prywatność Twoich danych — używane pakiety open source nie gromadzą, nie przesyłają ani nie przechowują samodzielnie danych osobowych w sposób wykraczający poza zakres opisany w niniejszej Polityce Prywatności.</p>
+  </section>
+
+  <section id="changes-privacy">
+    <h2>13. Zmiany Polityki Prywatności</h2>
+    <p>Możemy od czasu do czasu aktualizować niniejszą Politykę Prywatności, w szczególności po wprowadzeniu nowych funkcji, takich jak reklamy. O istotnych zmianach powiadomimy Cię za pośrednictwem Aplikacji lub w inny uzasadniony sposób. Data wejścia w życie wskazana na górze niniejszej Polityki odpowiada dacie ostatniej aktualizacji. Dalsze korzystanie z Aplikacji po wprowadzeniu zmian oznacza akceptację zaktualizowanej Polityki.</p>
+  </section>
+
+  <section id="contact-privacy">
+    <h2>14. Kontakt</h2>
+    <p>W przypadku pytań, wątpliwości lub wniosków dotyczących niniejszej Polityki Prywatności lub Twoich danych osobowych prosimy o kontakt:</p>
+    <div class="contact-card">
+      <p><strong>Criscode — Kontakt ds. ochrony danych osobowych</strong></p>
+      <p>ul. Gryczana 25, 56-400 Oleśnica, Polska</p>
+      <p>E-mail: <a href="mailto:contact@criscode.com">contact@criscode.com</a></p>
+      <p style="margin-top:8px; font-size:14px; color:#6c757d">
+        Organ nadzorczy: Prezes Urzędu Ochrony Danych Osobowych (UODO)<br>
+        ul. Stawki 2, 00-193 Warszawa &nbsp;·&nbsp; <a href="https://uodo.gov.pl" target="_blank" rel="noopener">uodo.gov.pl</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 Criscode. Wszelkie prawa zastrzeżone.</p>
+  <p style="margin-top:8px"><a href="terms-pl.html">Regulamin</a> &nbsp;·&nbsp; <a href="privacy-pl.html">Polityka Prywatności</a> &nbsp;·&nbsp; <a href="privacy.html">EN</a></p>
+</footer>
+
+</body>
+</html>

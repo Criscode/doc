@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usuń konto – SafeDose</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --ink-light: #6b6b6b;
+      --accent: #c0392b;
+      --accent-soft: #fdf1f0;
+      --accent-border: #f5c6c2;
+      --step: #e8e4de;
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 80px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent) 0%, #e74c3c 50%, #c0392b 100%);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      animation: fadeDown 0.5s ease both;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .logo-icon svg { width: 20px; height: 20px; fill: #fff; }
+
+    .logo-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 12px 40px rgba(0,0,0,0.06);
+      animation: fadeUp 0.55s ease both;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      color: var(--ink-light);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--step);
+      margin: 36px 0;
+    }
+
+    .steps-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 20px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      background: var(--step);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-light);
+    }
+
+    .step-text { font-size: 0.9rem; line-height: 1.6; padding-top: 5px; }
+    .step-text strong { font-weight: 500; color: var(--ink); }
+
+    .email-box {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .email-label { font-size: 0.78rem; color: var(--ink-light); margin-bottom: 3px; }
+    .email-address {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background 0.18s, transform 0.12s;
+    }
+
+    .btn:hover { background: #a93226; transform: translateY(-1px); }
+    .btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .note {
+      background: #f9f9f9;
+      border-left: 3px solid var(--step);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 0.83rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.78rem;
+      color: #aaa;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 1.65rem; }
+      .email-box { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-row">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 1 5 5v1h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V7a5 5 0 0 1 5-5zm0 9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm0-7a3 3 0 0 0-3 3v1h6V7a3 3 0 0 0-3-3z"/></svg>
+    </div>
+    <span class="logo-name">SafeDose</span>
+  </div>
+
+  <div class="card">
+    <div class="badge">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+      Usunięcie konta
+    </div>
+
+    <h1>Usuń swoje konto&nbsp;i&nbsp;dane</h1>
+    <p class="subtitle">
+      Masz prawo do żądania trwałego usunięcia konta SafeDose oraz wszystkich powiązanych danych osobowych. Twoje zgłoszenie zostanie rozpatrzone w ciągu <strong>30 dni</strong>.
+    </p>
+
+    <div class="steps-label">Jak to działa</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Wyślij wiadomość e-mail</strong> z adresu powiązanego z Twoim kontem na adres podany poniżej.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>W temacie wiadomości wpisz:</strong> „Usuń moje konto – SafeDose", abyśmy mogli szybko zidentyfikować Twoje zgłoszenie.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Potwierdzimy usunięcie</strong> konta i wszystkich danych w ciągu 30 dni, wysyłając Ci e-mail z potwierdzeniem.</div>
+      </div>
+    </div>
+
+    <div class="email-box">
+      <div>
+        <div class="email-label">Wyślij zgłoszenie na adres</div>
+        <div class="email-address">contact@criscode.com</div>
+      </div>
+      <a href="mailto:contact@criscode.com?subject=Usu%C5%84%20moje%20konto%20%E2%80%93%20SafeDose&body=Dzień%20dobry%2C%0A%0AProszę%20o%20trwałe%20usunięcie%20mojego%20konta%20SafeDose%20oraz%20wszystkich%20powiązanych%20danych%20osobowych.%0A%0ADziękuję." class="btn">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Wyślij e-mail
+      </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="note">
+      ℹ️ &nbsp;Jakie dane zostaną usunięte: Twój profil, harmonogramy leków, historia temperatury oraz wszystkie inne dane osobowe przechowywane w naszych systemach. Po usunięciu tej operacji <strong>nie można cofnąć</strong>.
+    </div>
+  </div>
+
+  <footer>© 2025 Criscode · SafeDose</footer>
+
+</body>
+</html>

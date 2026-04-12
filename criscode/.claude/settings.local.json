@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ':*)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/krystian/Documents/Projects/Criscode/doc/criscode/safedose/en/1.png)"
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 480" fill="none">
+  <defs>
+
+    <!-- Cuts the screen window from the phone body -->
+    <mask id="screen-mask">
+      <rect width="216" height="480" fill="white"/>
+      <rect x="8" y="18" width="200" height="446" rx="3" fill="black"/>
+    </mask>
+
+    <!-- Frame body gradient: slightly lighter top-left → darker bottom-right -->
+    <linearGradient id="body-grad" x1="0" y1="0" x2="216" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#2C2C2E"/>
+      <stop offset="100%" stop-color="#1A1A1C"/>
+    </linearGradient>
+
+    <!-- Side button gradient -->
+    <linearGradient id="btn-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#3C3C3E"/>
+      <stop offset="100%" stop-color="#2C2C2E"/>
+    </linearGradient>
+
+    <!-- Subtle inner screen-ring glow -->
+    <linearGradient id="ring-grad" x1="0" y1="0" x2="216" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- ── Phone body (screen hole cut out by mask) ───────────── -->
+  <rect x="0" y="0" width="216" height="480" rx="28" fill="url(#body-grad)" mask="url(#screen-mask)"/>
+
+  <!-- ── Outer edge highlight (1 px specular rim) ──────────── -->
+  <rect x="0.5" y="0.5" width="215" height="479" rx="27.5" fill="none" stroke="#3C3C3E" stroke-width="1"/>
+
+  <!-- ── Inner bezel ring around screen ────────────────────── -->
+  <rect x="7.5" y="17.5" width="201" height="447" rx="3.5" fill="none" stroke="url(#ring-grad)" stroke-width="1"/>
+
+  <!-- ── Speaker slot (top bezel, symmetric) ───────────────── -->
+  <rect x="88" y="7" width="40" height="3.5" rx="1.75" fill="#111113"/>
+  <!-- micro-perfs next to speaker -->
+  <circle cx="82" cy="8.75" r="1.4" fill="#111113"/>
+  <circle cx="134" cy="8.75" r="1.4" fill="#111113"/>
+
+  <!-- ── Punch-hole camera (inside screen area, top center) ── -->
+  <!-- Outer dark bezel of the hole -->
+  <circle cx="108" cy="32" r="7" fill="#101012"/>
+  <!-- Camera module ring -->
+  <circle cx="108" cy="32" r="5.5" fill="#0C0C0E" stroke="#1E1E20" stroke-width="0.75"/>
+  <!-- Lens -->
+  <circle cx="108" cy="32" r="3.5" fill="#0A0A0C"/>
+  <circle cx="108" cy="32" r="2"   fill="#101014"/>
+  <!-- Lens glint -->
+  <circle cx="106.5" cy="30.5" r="0.8" fill="#4A4A6A" opacity="0.7"/>
+
+  <!-- ── Power button (right side) ─────────────────────────── -->
+  <rect x="213.5" y="150" width="5.5" height="56" rx="2.75" fill="url(#btn-grad)"/>
+  <!-- Raised edge highlight -->
+  <line x1="214.5" y1="151" x2="214.5" y2="205" stroke="#444446" stroke-width="0.75"/>
+
+  <!-- ── Volume Up (left side) ─────────────────────────────── -->
+  <rect x="-3" y="124" width="5.5" height="40" rx="2.75" fill="url(#btn-grad)"/>
+  <line x1="2"   y1="125" x2="2"   y2="163"  stroke="#444446" stroke-width="0.75"/>
+
+  <!-- ── Volume Down (left side) ───────────────────────────── -->
+  <rect x="-3" y="172" width="5.5" height="40" rx="2.75" fill="url(#btn-grad)"/>
+  <line x1="2"   y1="173" x2="2"   y2="211"  stroke="#444446" stroke-width="0.75"/>
+
+  <!-- ── USB-C port (bottom bezel, centered) ───────────────── -->
+  <rect x="90" y="472" width="36" height="5" rx="2.5" fill="#111113"/>
+  <!-- Pin detail inside -->
+  <rect x="95" y="473.5" width="26" height="2" rx="1" fill="#0A0A0C"/>
+
+  <!-- ── Microphone dots (bottom bezel) ────────────────────── -->
+  <circle cx="74"  cy="474.5" r="1.75" fill="#111113"/>
+  <circle cx="142" cy="474.5" r="1.75" fill="#111113"/>
+
+  <!-- ── Bottom chin separator line ────────────────────────── -->
+  <line x1="28" y1="464.5" x2="188" y2="464.5" stroke="#222224" stroke-width="0.5"/>
+
+</svg>

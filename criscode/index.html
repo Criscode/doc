@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criscode — Building Apps That Matter</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:        #2B5AE8;
+      --blue-dark:   #1A3FBD;
+      --cyan:        #00C4E8;
+      --cyan-light:  #6FDDEE;
+      --periwinkle:  #A8BFFF;
+      --purple:      #8253F0;
+      --purple-dark: #5E2FCA;
+      --white:       #FFFFFF;
+      --off-white:   #F6F8FF;
+      --text:        #0D1B4B;
+      --text-muted:  #5A6A9A;
+      --border:      rgba(168, 191, 255, 0.25);
+      --gradient-hero: linear-gradient(135deg, #0D1B4B 0%, #1A3FBD 45%, #5E2FCA 100%);
+      --gradient-cta:  linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--periwinkle) 50%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(13, 27, 75, 0.72);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img { height: 38px; width: auto; }
+
+    .nav-logo-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cyan); }
+
+    .nav-cta {
+      background: var(--gradient-cta);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── Language switcher ────────────────────────────────────── */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 10px;
+      padding: 0.2rem;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: rgba(255,255,255,0.55);
+      transition: background 0.18s, color 0.18s;
+      letter-spacing: 0.03em;
+    }
+
+    .lang-btn:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+
+    .lang-btn.active { background: var(--gradient-cta); color: var(--white); }
+
+    .lang-flag { font-size: 1rem; line-height: 1; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      background: var(--gradient-hero);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+
+    .hero-shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+    .shape { position: absolute; opacity: 0.12; }
+
+    .shape-tri { width: 0; height: 0; border-style: solid; }
+
+    .s1 { border-width: 0 90px 156px 90px; border-color: transparent transparent var(--cyan) transparent; top: 8%; right: 12%; animation: float1 8s ease-in-out infinite; }
+    .s2 { border-width: 156px 90px 0 90px; border-color: var(--periwinkle) transparent transparent transparent; top: 18%; right: 22%; animation: float1 10s ease-in-out infinite reverse; }
+    .s3 { border-width: 0 60px 104px 60px; border-color: transparent transparent var(--purple) transparent; bottom: 15%; right: 8%; animation: float2 7s ease-in-out infinite; opacity: 0.15; }
+    .s4 { border-width: 0 120px 208px 120px; border-color: transparent transparent var(--blue) transparent; top: -4%; left: 4%; animation: float2 12s ease-in-out infinite reverse; opacity: 0.08; }
+    .s5 { width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, var(--purple) 0%, transparent 70%); bottom: -80px; right: -60px; opacity: 0.18; }
+    .s6 { width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, var(--cyan) 0%, transparent 70%); top: -100px; left: -80px; opacity: 0.1; }
+
+    @keyframes float1 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-24px) rotate(6deg)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(20px) rotate(-4deg)} }
+
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 5rem 0 6rem; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(168,191,255,0.15);
+      border: 1px solid rgba(168,191,255,0.3);
+      color: var(--periwinkle);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.7} }
+
+    .hero h1 { font-size: clamp(2.8rem,6vw,5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; color: var(--white); margin-bottom: 1.5rem; }
+    .hero h1 span { display: block; }
+
+    .hero p { font-size: clamp(1rem,2vw,1.2rem); color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 3rem; font-weight: 400; line-height: 1.7; }
+
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; border: none; }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary { background: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 100%); color: var(--white); box-shadow: 0 8px 32px rgba(0,196,232,0.35); }
+    .btn-primary:hover { box-shadow: 0 12px 40px rgba(0,196,232,0.45); }
+
+    .btn-ghost { background: rgba(255,255,255,0.08); color: var(--white); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+    /* ── Stats ────────────────────────────────────────────────── */
+    .stats { background: var(--off-white); padding: 3.5rem 0; border-bottom: 1px solid rgba(168,191,255,0.2); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; text-align: center; }
+
+    .stat-value { font-size: 2.6rem; font-weight: 900; letter-spacing: -0.04em; background: var(--gradient-cta); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-top: 0.25rem; }
+
+    /* ── Products ─────────────────────────────────────────────── */
+    .products { padding: 7rem 0; background: var(--white); }
+
+    .section-label { text-align: center; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); margin-bottom: 1rem; }
+    .section-title { text-align: center; font-size: clamp(1.9rem,3.5vw,2.75rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { text-align: center; font-size: 1.05rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 4rem; line-height: 1.7; }
+
+    .product-card { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; border-radius: 28px; overflow: hidden; box-shadow: 0 24px 80px rgba(43,90,232,0.12), 0 4px 16px rgba(43,90,232,0.06); border: 1px solid rgba(168,191,255,0.25); }
+
+    .product-visual { background: linear-gradient(135deg,#EBF1FF 0%,#F0E8FF 100%); display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem; position: relative; min-height: 520px; }
+    .product-visual::before { content:''; position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle,rgba(130,83,240,.15) 0%,transparent 70%); top:-80px; right:-80px; pointer-events:none; }
+    .product-visual::after  { content:''; position:absolute; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle,rgba(0,196,232,.12) 0%,transparent 70%); bottom:-60px; left:-40px; pointer-events:none; }
+
+    /* ── Screenshot carousel ──────────────────────────────────── */
+    .screenshot-carousel {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* Row that holds [prev] [phone] [next] */
+    .carousel-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* Wrapper gives padding for the SVG frame overflow */
+    .carousel-frame-wrapper {
+      position: relative;
+      width: 200px;
+      flex-shrink: 0;
+      padding: 18px 0 16px; /* matches SVG top/bottom bezels */
+    }
+
+    .carousel-stage {
+      overflow: hidden;
+      border-radius: 3px;
+      background: #fff;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .carousel-track img {
+      width: 200px;
+      min-width: 200px;
+      height: auto;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* SVG frame overlays the stage, extends 8px each side */
+    .device-frame {
+      position: absolute;
+      left: -8px;
+      top: 0;               /* sits at top of wrapper padding */
+      width: 216px;         /* 200 + 8 + 8 */
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Prev / Next buttons — sit outside the phone */
+    .carousel-btn-side {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid rgba(43,90,232,.12);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(43,90,232,.13);
+      transition: background .2s, box-shadow .2s, transform .2s;
+      flex-shrink: 0;
+    }
+    .carousel-btn-side:hover {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 6px 22px rgba(43,90,232,.28);
+      transform: scale(1.08);
+    }
+    .carousel-btn-side svg {
+      width: 18px; height: 18px;
+      stroke: var(--text);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke .2s;
+    }
+    .carousel-btn-side:hover svg { stroke: #fff; }
+
+    .carousel-dots { display:flex; gap:.45rem; align-items:center; }
+    .carousel-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(43,90,232,.2);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: all .25s cubic-bezier(.4,0,.2,1);
+    }
+    .carousel-dot.active { background: var(--blue); width: 20px; border-radius: 4px; }
+
+    /* ── iOS coming-soon notice ───────────────────────────────── */
+    .store-notice {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      margin-top: .75rem;
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+    .store-notice svg { width:14px; height:14px; stroke:var(--text-muted); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+    .store-btn-disabled { opacity:.45; pointer-events:none; cursor:default; }
+
+    .product-info { padding: 4rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
+
+    .product-tag { display:inline-flex; align-items:center; gap:.4rem; background:rgba(130,83,240,.1); color:var(--purple); font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .85rem; border-radius:100px; border:1px solid rgba(130,83,240,.2); margin-bottom:1.5rem; width:fit-content; }
+
+    .product-name { font-size:clamp(1.8rem,2.5vw,2.4rem); font-weight:800; letter-spacing:-.03em; color:var(--text); margin-bottom:1rem; line-height:1.2; }
+    .product-desc { font-size:1rem; color:var(--text-muted); line-height:1.75; margin-bottom:2.5rem; }
+
+    .feature-list { display:flex; flex-direction:column; gap:.75rem; margin-bottom:2.5rem; }
+    .feature-item { display:flex; align-items:center; gap:.75rem; font-size:.9rem; font-weight:500; color:var(--text); }
+    .feature-icon { width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,var(--cyan) 0%,var(--blue) 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .feature-icon svg { width:14px; height:14px; stroke:white; }
+
+    /* ── Store buttons ────────────────────────────────────────── */
+    .store-buttons { display:flex; gap:.85rem; flex-wrap:wrap; }
+
+    .store-btn { display:inline-flex; align-items:center; gap:.65rem; padding:.75rem 1.25rem; border-radius:14px; text-decoration:none; background:var(--text); color:var(--white); transition:transform .2s,box-shadow .2s,background .2s; border:1px solid rgba(255,255,255,.06); box-shadow:0 4px 16px rgba(13,27,75,.2); }
+    .store-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(13,27,75,.3); background:#1A3FBD; }
+
+    .store-btn-icon { width:28px; height:28px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .store-btn-icon svg { width:28px; height:28px; }
+
+    .store-btn-text { display:flex; flex-direction:column; }
+    .store-btn-sub { font-size:.65rem; font-weight:400; color:rgba(255,255,255,.65); text-transform:uppercase; letter-spacing:.06em; line-height:1; }
+    .store-btn-name { font-size:.95rem; font-weight:700; line-height:1.3; }
+
+    /* ── Values ───────────────────────────────────────────────── */
+    .values { padding:7rem 0; background:var(--off-white); }
+
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:1rem; }
+
+    .value-card { background:var(--white); border-radius:20px; padding:2.25rem 2rem; border:1px solid rgba(168,191,255,.3); transition:transform .25s,box-shadow .25s; }
+    .value-card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(43,90,232,.1); }
+
+    .value-icon { width:52px; height:52px; border-radius:14px; margin-bottom:1.25rem; display:flex; align-items:center; justify-content:center; }
+    .vi-blue   { background:linear-gradient(135deg,var(--cyan) 0%,var(--blue) 100%); }
+    .vi-purple { background:linear-gradient(135deg,var(--periwinkle) 0%,var(--purple) 100%); }
+    .vi-mixed  { background:linear-gradient(135deg,var(--blue) 0%,var(--purple) 100%); }
+    .value-icon svg { width:24px; height:24px; stroke:white; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+    .value-title { font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+    .value-desc  { font-size:.9rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ── CTA ──────────────────────────────────────────────────── */
+    .cta-section { padding:6rem 0; background:var(--gradient-hero); position:relative; overflow:hidden; }
+    .cta-section::before { content:''; position:absolute; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(0,196,232,.12) 0%,transparent 70%); top:-200px; left:-200px; pointer-events:none; }
+    .cta-section::after  { content:''; position:absolute; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(130,83,240,.15) 0%,transparent 70%); bottom:-150px; right:-100px; pointer-events:none; }
+
+    .cta-inner { position:relative; z-index:2; text-align:center; }
+    .cta-inner h2 { font-size:clamp(1.9rem,3.5vw,2.75rem); font-weight:800; letter-spacing:-.03em; color:var(--white); margin-bottom:1rem; }
+    .cta-inner p  { font-size:1.05rem; color:rgba(255,255,255,.7); max-width:480px; margin:0 auto 2.5rem; line-height:1.7; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer { background:#060F2E; padding:3.5rem 0 2rem; color:rgba(255,255,255,.55); }
+
+    .footer-top { display:flex; align-items:flex-start; justify-content:space-between; gap:2rem; padding-bottom:2.5rem; border-bottom:1px solid rgba(255,255,255,.07); flex-wrap:wrap; }
+
+    .footer-brand img { height:40px; width:auto; margin-bottom:.75rem; }
+    .footer-brand-name { font-size:1.1rem; font-weight:800; color:var(--white); letter-spacing:-.02em; margin-bottom:.5rem; }
+    .footer-brand-tag  { font-size:.85rem; color:rgba(255,255,255,.45); max-width:240px; line-height:1.5; }
+
+    .footer-nav-group h4 { font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:.9rem; }
+    .footer-nav-group ul { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+    .footer-nav-group a  { text-decoration:none; color:rgba(255,255,255,.55); font-size:.9rem; transition:color .2s; }
+    .footer-nav-group a:hover { color:var(--cyan); }
+
+    .footer-bottom { padding-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    .footer-copy { font-size:.82rem; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .product-card { grid-template-columns: 1fr; }
+      .product-visual { min-height: auto; padding: 3rem 1rem; }
+      .product-info { padding: 2.5rem 2rem; }
+      .values-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-top { flex-direction: column; }
+      .carousel-btn-side { width: 36px; height: 36px; }
+      .carousel-btn-side svg { width: 15px; height: 15px; }
+      .carousel-row { gap: 0.75rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .store-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ──────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="?" class="nav-logo">
+        <img src="logo.png" alt="Criscode logo" />
+        <span class="nav-logo-name">Criscode</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#products" data-i18n="nav.products">Products</a></li>
+        <li><a href="#about"    data-i18n="nav.about">About</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="nav.cta">Get in touch</a></li>
+      </ul>
+      <div class="lang-switcher">
+        <a href="?lang=en" class="lang-btn" id="btn-en" aria-label="English"><span class="lang-flag">🇬🇧</span> EN</a>
+        <a href="?lang=pl" class="lang-btn" id="btn-pl" aria-label="Polski"><span class="lang-flag">🇵🇱</span> PL</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-shapes">
+      <div class="shape shape-tri s1"></div>
+      <div class="shape shape-tri s2"></div>
+      <div class="shape shape-tri s3"></div>
+      <div class="shape shape-tri s4"></div>
+      <div class="shape s5"></div>
+      <div class="shape s6"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span data-i18n="hero.badge">Mobile-first software studio</span>
+        </div>
+        <h1>
+          <span data-i18n="hero.h1a">We build apps</span>
+          <span class="gradient-text" data-i18n="hero.h1b">that genuinely help.</span>
+        </h1>
+        <p data-i18n="hero.p">Criscode crafts thoughtful, human-centred mobile applications that solve real everyday problems — beautifully and reliably.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>
+            <span data-i18n="hero.cta1">Explore our apps</span>
+          </a>
+          <a href="#about" class="btn btn-ghost" data-i18n="hero.cta2">Learn about us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats ─────────────────────────────────────────────────── -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div><div class="stat-value">1+</div><div class="stat-label" data-i18n="stats.l1">App on the stores</div></div>
+        <div><div class="stat-value">iOS &amp; Android</div><div class="stat-label" data-i18n="stats.l2">Platform coverage</div></div>
+        <div><div class="stat-value">100%</div><div class="stat-label" data-i18n="stats.l3">Focused on quality</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Products ──────────────────────────────────────────────── -->
+  <section class="products" id="products">
+    <div class="container">
+      <p class="section-label" data-i18n="products.label">Our products</p>
+      <h2 class="section-title"><span data-i18n="products.title">Apps built with</span> <span class="gradient-text" data-i18n="products.accent">purpose</span></h2>
+      <p class="section-sub" data-i18n="products.sub">Each product we ship solves a specific, meaningful problem. No filler, no bloat — just software that earns a place on your home screen.</p>
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="screenshot-carousel" id="safedose-carousel">
+
+            <div class="carousel-row">
+              <!-- Prev button — left of phone -->
+              <button class="carousel-btn-side" id="carousel-prev" aria-label="Previous screenshot">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+
+              <!-- Phone frame wrapper -->
+              <div class="carousel-frame-wrapper">
+                <div class="carousel-stage">
+                  <div class="carousel-track" id="carousel-track"></div>
+                </div>
+                <img src="pixel-frame.svg" class="device-frame" alt="" aria-hidden="true" />
+              </div>
+
+              <!-- Next button — right of phone -->
+              <button class="carousel-btn-side" id="carousel-next" aria-label="Next screenshot">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+
+            <div class="carousel-dots" id="carousel-dots"></div>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <span class="product-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+            <span data-i18n="product.tag">Health &amp; Parenting</span>
+          </span>
+          <h3 class="product-name">SafeDose</h3>
+          <p class="product-desc" data-i18n="product.desc">Peace of mind in your pocket. SafeDose helps parents calculate the correct medication dosage for their child based on weight and age — quickly, accurately, and safely. No more second-guessing or searching through leaflets at 2&nbsp;am.</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span data-i18n="product.f1">Weight-based dosage calculator</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span data-i18n="product.f2">Common children's medicines covered</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span data-i18n="product.f3">Clear, parent-friendly interface</span>
+            </div>
+          </div>
+
+          <div class="store-buttons">
+            <a href="#" class="store-btn store-btn-disabled" aria-label="App Store" tabindex="-1">
+              <div class="store-btn-icon">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.3 14.9c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.3-4.4-2.4-1.9-.2-3.7 1.1-4.6 1.1-.9 0-2.4-1.1-3.9-1-2 0-3.8 1.2-4.9 2.9-2.1 3.6-.5 9 1.5 11.9 1 1.4 2.1 3 3.6 2.9 1.5-.1 2-.9 3.8-.9 1.7 0 2.2.9 3.8.9 1.6 0 2.6-1.4 3.5-2.8 1.1-1.6 1.6-3.2 1.6-3.3-.1 0-3.1-1.2-3.1-4.7z" fill="white"/>
+                  <path d="M17.4 5.8c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.7.8-3.5 1.8-.8.9-1.4 2.3-1.2 3.6 1.3.1 2.7-.6 3.5-1.6z" fill="white"/>
+                </svg>
+              </div>
+              <div class="store-btn-text">
+                <span class="store-btn-sub" data-i18n="store.apple.sub">Download on the</span>
+                <span class="store-btn-name">App Store</span>
+              </div>
+            </a>
+            <a href="#" class="store-btn" aria-label="Google Play">
+              <div class="store-btn-icon">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.5 3.2c-.3.3-.5.8-.5 1.5v18.6c0 .7.2 1.2.5 1.5l.1.1 10.4-10.4v-.2L4.6 3.1l-.1.1z" fill="#00D2FF"/>
+                  <path d="M18.5 17.5l-3.5-3.5v-.3l3.5-3.5.1.1 4.1 2.3c1.2.7 1.2 1.8 0 2.4l-4.2 2.5z" fill="#FFD600"/>
+                  <path d="M18.6 17.4L15 13.8 4.5 24.3c.4.4 1 .4 1.8 0l12.3-6.9" fill="#FF4444"/>
+                  <path d="M18.6 10.2L6.3 3.3c-.8-.4-1.4-.4-1.8 0L15 13.8l3.6-3.6z" fill="#00E676"/>
+                </svg>
+              </div>
+              <div class="store-btn-text">
+                <span class="store-btn-sub" data-i18n="store.play.sub">Get it on</span>
+                <span class="store-btn-name">Google Play</span>
+              </div>
+            </a>
+          </div>
+          <p class="store-notice">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span data-i18n="ios.notice">iOS version is coming soon.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Values ─────────────────────────────────────────────────── -->
+  <section class="values" id="about">
+    <div class="container">
+      <p class="section-label" data-i18n="values.label">Why Criscode</p>
+      <h2 class="section-title"><span data-i18n="values.title">How we approach</span> <span class="gradient-text" data-i18n="values.accent">every product</span></h2>
+      <p class="section-sub" data-i18n="values.sub">Three principles guide every line of code we write and every screen we design.</p>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon vi-blue">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="value-title" data-i18n="v1.title">Purposeful design</div>
+          <div class="value-desc"  data-i18n="v1.desc">Every interaction is deliberate. We remove friction and complexity so users can focus on what matters — not on figuring out the app.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon vi-purple">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="value-title" data-i18n="v2.title">Safety-first mindset</div>
+          <div class="value-desc"  data-i18n="v2.desc">When our apps touch health or child-safety topics, we apply clinical rigour to every calculation, source, and recommendation we surface.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon vi-mixed">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="value-title" data-i18n="v3.title">Reliable &amp; maintained</div>
+          <div class="value-desc"  data-i18n="v3.desc">Shipping is just the beginning. We keep our apps updated, respond to feedback promptly, and treat every user report as a signal worth acting on.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────────── -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-inner">
+        <p class="section-label" style="color:var(--cyan-light)" data-i18n="cta.label">Get in touch</p>
+        <h2><span data-i18n="cta.h2a">Have an idea?</span> <span class="gradient-text" data-i18n="cta.h2b">Let's talk.</span></h2>
+        <p data-i18n="cta.p">We're always open to feedback, collaborations, and conversations about how to make our apps even better.</p>
+        <div class="hero-actions">
+          <a href="mailto:contact@criscode.com" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            contact@criscode.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="logo.png" alt="Criscode" />
+          <div class="footer-brand-name">Criscode</div>
+          <div class="footer-brand-tag" data-i18n="footer.tag">Building apps that genuinely help people in everyday life.</div>
+        </div>
+        <div class="footer-nav-group">
+          <h4 data-i18n="footer.h.products">Products</h4>
+          <ul><li><a href="#products">SafeDose</a></li></ul>
+        </div>
+        <div class="footer-nav-group">
+          <h4 data-i18n="footer.h.company">Company</h4>
+          <ul>
+            <li><a href="#about"   data-i18n="footer.about">About</a></li>
+            <li><a href="#contact" data-i18n="footer.contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy" data-i18n="footer.copy">&copy; 2026 Criscode. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    /* ── Carousel ─────────────────────────────────────────────── */
+    var SLIDE_COUNT = 6;
+    var currentSlide = 0;
+    var isDragging = false, dragStartX = 0, dragDeltaX = 0;
+
+    function buildCarousel(lang) {
+      var track = document.getElementById('carousel-track');
+      var dotsEl = document.getElementById('carousel-dots');
+      track.innerHTML = '';
+      dotsEl.innerHTML = '';
+
+      for (var i = 1; i <= SLIDE_COUNT; i++) {
+        var img = document.createElement('img');
+        img.src = 'safedose/' + lang + '/' + i + '.png';
+        img.alt = 'SafeDose screenshot ' + i;
+        img.draggable = false;
+        track.appendChild(img);
+
+        var dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 1 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slide ' + i);
+        (function(idx){ dot.addEventListener('click', function(){ goToSlide(idx); }); })(i - 1);
+        dotsEl.appendChild(dot);
+      }
+      goToSlide(0);
+    }
+
+    function goToSlide(n) {
+      currentSlide = Math.max(0, Math.min(n, SLIDE_COUNT - 1));
+      document.getElementById('carousel-track').style.transform =
+        'translateX(-' + (currentSlide * 200) + 'px)';
+      document.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    document.getElementById('carousel-prev').addEventListener('click', function() { goToSlide(currentSlide - 1); });
+    document.getElementById('carousel-next').addEventListener('click', function() { goToSlide(currentSlide + 1); });
+
+    // Touch / mouse drag on the phone screen area
+    var dragTarget = document.querySelector('.carousel-frame-wrapper');
+    function onDragStart(x) { isDragging = true; dragStartX = x; dragDeltaX = 0; }
+    function onDragMove(x) {
+      if (!isDragging) return;
+      dragDeltaX = x - dragStartX;
+      document.getElementById('carousel-track').style.transition = 'none';
+      document.getElementById('carousel-track').style.transform =
+        'translateX(' + (-currentSlide * 200 + dragDeltaX) + 'px)';
+    }
+    function onDragEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      document.getElementById('carousel-track').style.transition = '';
+      if (dragDeltaX < -40) goToSlide(currentSlide + 1);
+      else if (dragDeltaX > 40) goToSlide(currentSlide - 1);
+      else goToSlide(currentSlide);
+    }
+    dragTarget.addEventListener('mousedown',  function(e){ onDragStart(e.clientX); });
+    window.addEventListener('mousemove',      function(e){ onDragMove(e.clientX); });
+    window.addEventListener('mouseup',        onDragEnd);
+    dragTarget.addEventListener('touchstart', function(e){ onDragStart(e.touches[0].clientX); }, {passive:true});
+    dragTarget.addEventListener('touchmove',  function(e){ onDragMove(e.touches[0].clientX); }, {passive:true});
+    dragTarget.addEventListener('touchend',   onDragEnd);
+
+    // Keyboard: arrow keys on the carousel
+    document.getElementById('safedose-carousel').addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goToSlide(currentSlide - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goToSlide(currentSlide + 1); }
+    });
+
+    /* ── Translations ─────────────────────────────────────────── */
+    var T = {
+      en: {
+        'nav.products':    'Products',
+        'nav.about':       'About',
+        'nav.cta':         'Get in touch',
+        'hero.badge':      'Mobile-first software studio',
+        'hero.h1a':        'We build apps',
+        'hero.h1b':        'that genuinely help.',
+        'hero.p':          'Criscode crafts thoughtful, human-centred mobile applications that solve real everyday problems — beautifully and reliably.',
+        'hero.cta1':       'Explore our apps',
+        'hero.cta2':       'Learn about us',
+        'stats.l1':        'App on the stores',
+        'stats.l2':        'Platform coverage',
+        'stats.l3':        'Focused on quality',
+        'products.label':  'Our products',
+        'products.title':  'Apps built with',
+        'products.accent': 'purpose',
+        'products.sub':    'Each product we ship solves a specific, meaningful problem. No filler, no bloat — just software that earns a place on your home screen.',
+        'product.tag':     'Health & Parenting',
+        'product.desc':    'Peace of mind in your pocket. SafeDose helps parents calculate the correct medication dosage for their child based on weight and age — quickly, accurately, and safely. No more second-guessing or searching through leaflets at 2\u00a0am.',
+        'product.f1':      'Weight-based dosage calculator',
+        'product.f2':      "Common children's medicines covered",
+        'product.f3':      'Clear, parent-friendly interface',
+        'store.apple.sub': 'Download on the',
+        'store.play.sub':  'Get it on',
+        'values.label':    'Why Criscode',
+        'values.title':    'How we approach',
+        'values.accent':   'every product',
+        'values.sub':      'Three principles guide every line of code we write and every screen we design.',
+        'v1.title': 'Purposeful design',
+        'v1.desc':  'Every interaction is deliberate. We remove friction and complexity so users can focus on what matters — not on figuring out the app.',
+        'v2.title': 'Safety-first mindset',
+        'v2.desc':  'When our apps touch health or child-safety topics, we apply clinical rigour to every calculation, source, and recommendation we surface.',
+        'v3.title': 'Reliable & maintained',
+        'v3.desc':  'Shipping is just the beginning. We keep our apps updated, respond to feedback promptly, and treat every user report as a signal worth acting on.',
+        'cta.label': 'Get in touch',
+        'cta.h2a':   'Have an idea?',
+        'cta.h2b':   "Let's talk.",
+        'cta.p':     "We're always open to feedback, collaborations, and conversations about how to make our apps even better.",
+        'footer.tag':        'Building apps that genuinely help people in everyday life.',
+        'footer.h.products': 'Products',
+        'footer.h.company':  'Company',
+        'footer.about':      'About',
+        'footer.contact':    'Contact',
+        'footer.copy':       '\u00a9 2026 Criscode. All rights reserved.',
+        'ios.notice':        'iOS version is coming soon.',
+      },
+      pl: {
+        'nav.products':    'Produkty',
+        'nav.about':       'O nas',
+        'nav.cta':         'Skontaktuj się',
+        'hero.badge':      'Studio aplikacji mobilnych',
+        'hero.h1a':        'Tworzymy aplikacje,',
+        'hero.h1b':        'które naprawdę pomagają.',
+        'hero.p':          'Criscode projektuje przemyślane, zorientowane na człowieka aplikacje mobilne, które rozwiązują prawdziwe, codzienne problemy — pięknie i niezawodnie.',
+        'hero.cta1':       'Zobacz nasze aplikacje',
+        'hero.cta2':       'O nas',
+        'stats.l1':        'Aplikacja w sklepach',
+        'stats.l2':        'Dostępność platform',
+        'stats.l3':        'Skupieni na jakości',
+        'products.label':  'Nasze produkty',
+        'products.title':  'Aplikacje tworzone z',
+        'products.accent': 'sensem',
+        'products.sub':    'Każdy produkt, który wydajemy, rozwiązuje konkretny, ważny problem. Bez zbędnych funkcji — tylko oprogramowanie, które zasługuje na miejsce na ekranie głównym.',
+        'product.tag':     'Zdrowie i rodzicielstwo',
+        'product.desc':    'Spokój ducha w Twojej kieszeni. SafeDose pomaga rodzicom wyliczyć prawidłową dawkę leku dla dziecka na podstawie jego wagi i wieku — szybko, dokładnie i bezpiecznie. Koniec z domysłami i przeszukiwaniem ulotek o\u00a02\u00a0w\u00a0nocy.',
+        'product.f1':      'Kalkulator dawkowania oparty na wadze',
+        'product.f2':      'Najpopularniejsze leki dla dzieci',
+        'product.f3':      'Przejrzysty interfejs przyjazny rodzicom',
+        'store.apple.sub': 'Pobierz z',
+        'store.play.sub':  'Pobierz z',
+        'values.label':    'Dlaczego Criscode',
+        'values.title':    'Jak podchodzimy do',
+        'values.accent':   'każdego produktu',
+        'values.sub':      'Trzy zasady kierują każdą linią kodu, którą piszemy, i każdym ekranem, który projektujemy.',
+        'v1.title': 'Celowy design',
+        'v1.desc':  'Każda interakcja jest przemyślana. Usuwamy zbędne elementy i złożoność, by użytkownicy mogli skupić się na tym, co ważne — a nie na obsłudze aplikacji.',
+        'v2.title': 'Bezpieczeństwo na pierwszym miejscu',
+        'v2.desc':  'Gdy nasze aplikacje dotyczą zdrowia lub bezpieczeństwa dzieci, stosujemy kliniczny rygor wobec każdego obliczenia, źródła i rekomendacji.',
+        'v3.title': 'Niezawodność i aktualizacje',
+        'v3.desc':  'Wydanie to dopiero początek. Regularnie aktualizujemy aplikacje, szybko reagujemy na opinie i traktujemy każdy raport użytkownika jako sygnał warty uwagi.',
+        'cta.label': 'Skontaktuj się',
+        'cta.h2a':   'Masz pomysł?',
+        'cta.h2b':   'Porozmawiajmy.',
+        'cta.p':     'Jesteśmy otwarci na opinie, współpracę i rozmowy o tym, jak uczynić nasze aplikacje jeszcze lepszymi.',
+        'footer.tag':        'Tworzymy aplikacje, które naprawdę pomagają ludziom w codziennym życiu.',
+        'footer.h.products': 'Produkty',
+        'footer.h.company':  'Firma',
+        'footer.about':      'O nas',
+        'footer.contact':    'Kontakt',
+        'footer.copy':       '\u00a9 2026 Criscode. Wszelkie prawa zastrzeżone.',
+        'ios.notice':        'Wersja iOS już wkrótce.',
+      }
+    };
+
+    /* ── Language resolution (priority order) ─────────────────── */
+    var PREF_KEY = 'criscode_lang';
+    var params   = new URLSearchParams(window.location.search);
+    var urlLang  = params.get('lang');
+    var lang;
+
+    if (urlLang === 'en' || urlLang === 'pl') {
+      // Explicit switcher click — always wins, persists preference.
+      lang = urlLang;
+      localStorage.setItem(PREF_KEY, lang);
+      // Clean the param from the address bar without reloading.
+      history.replaceState(null, '', window.location.pathname);
+    } else {
+      lang = localStorage.getItem(PREF_KEY);  // may be null on first visit
+    }
+
+    /* ── Apply translations ───────────────────────────────────── */
+    function applyLang(l) {
+      var dict = T[l] || T['en'];
+      document.documentElement.lang = l;
+
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+
+      // Mark active lang button.
+      document.getElementById('btn-en').classList.toggle('active', l === 'en');
+      document.getElementById('btn-pl').classList.toggle('active', l === 'pl');
+
+      // Rebuild carousel with the correct language screenshots.
+      buildCarousel(l);
+    }
+
+    if (lang) {
+      applyLang(lang);
+    } else {
+      // First visit — detect by IP, default to EN while waiting.
+      applyLang('en');
+      fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var detected = (data && data.country_code === 'PL') ? 'pl' : 'en';
+          localStorage.setItem(PREF_KEY, detected);
+          applyLang(detected);
+        })
+        .catch(function () { localStorage.setItem(PREF_KEY, 'en'); });
+    }
+  })();
+  </script>
+
+</body>
+</html>
